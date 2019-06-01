@@ -1,0 +1,14 @@
+.table {
+  margin: auto;
+  margin-top: 5px;
+  width: 90%;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.header {  
+  text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+}

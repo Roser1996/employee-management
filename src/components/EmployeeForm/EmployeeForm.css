@@ -1,0 +1,35 @@
+.addTitle {
+  display: flex;
+}
+
+.title {
+  text-align: left;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.back {
+  margin-left: 10%;
+}
+
+img {
+  width: 400px;
+  height: 400px;
+  padding-top: 10%;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+}
+
+.photo-select {
+  margin: auto;
+  margin-top: 10%;
+  text-align: center;
+}
+
+input:focus {
+  outline: none;
+}
