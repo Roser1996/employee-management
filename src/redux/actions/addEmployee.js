@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import { addTempEmployee } from './getEmployees';
+
 const addEmployeeRequest = () => {
   return {
     type: "ADD_EMPLOYEE_REQUEST"
@@ -25,6 +27,7 @@ export const addEmployeeAction = (employeeInfo, callback) => {
     axios.post('http://localhost:4000/api/add', employeeInfo)
       .then(res => {
         dispatch(addEmployeeSuccess());
+        addTempEmployee(res.data);
         callback();
       })
       .catch(err => {

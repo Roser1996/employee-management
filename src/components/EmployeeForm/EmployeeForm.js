@@ -178,6 +178,7 @@ class EmployeeForm extends Component {
   handleSubmitBtn = () => {
     if (this.checkValidation()) {
       const {
+        avatarUrl,
         _id,
         name,
         title,
@@ -202,14 +203,22 @@ class EmployeeForm extends Component {
       employeeInfo.email = email;
       employeeInfo.manager = manager;
       if (this.props.pageName === "add") {
-        this.props.uploadEmployeeAvatar(employeeInfo, this.props.addEmployeeList, imgFile, () => {
+        this.props.uploadEmployeeAvatar(employeeInfo, this.props.addEmployeeList, imgFile, "", () => {
           this.props.history.push('/');
         })
       }
       else {
-        this.props.editEmployeeList(employeeInfo, () => {
-          this.props.history.push('/');
-        });
+        if (imgFile) {
+          let avatarName = avatarUrl.split('=')[1];
+          this.props.uploadEmployeeAvatar(employeeInfo, this.props.editEmployeeList, imgFile, avatarName, () => {
+            this.props.history.push('/');
+          })
+        }
+        else {
+          this.props.editEmployeeList(employeeInfo, () => {
+            this.props.history.push('/');
+          });
+        }
       }
     }
     else {
@@ -302,7 +311,11 @@ class EmployeeForm extends Component {
                 <img src={userImageDefault} alt="Load Error" /> :
                 <img src={imgSrc} alt="Load Error" />
               ) :
-              <img alt="Load error" src={avatarUrl} />
+              (
+                renderState !== "upload" ?
+                <img alt="Load error" src={avatarUrl} /> :
+                <img src={imgSrc} alt="Load Error" />
+              )
             }
             {/* <form action="" method="POST" enctype="multipart/form-data">
             </form> */}
@@ -493,8 +506,8 @@ const mapDispatchToProps = dispatch => {
     addEmployeeList: (employeeInfo, callback) => {
       dispatch(addEmployeeAction(employeeInfo, callback));
     },
-    uploadEmployeeAvatar: (employeeInfo, operation, imageFile, callback) => {
-      dispatch(uploadAvatarAction(employeeInfo, operation, imageFile, callback));
+    uploadEmployeeAvatar: (employeeInfo, operation, imageFile, preImage,callback) => {
+      dispatch(uploadAvatarAction(employeeInfo, operation, imageFile, preImage,callback));
     },
     getEmployeeIdList: (employeeId, callback) => {
       dispatch(getEmployeeIdAction(employeeId, callback));

@@ -20,13 +20,13 @@ const uploadAvatarFail = (err) => {
   }
 }
 
-export const uploadAvatarAction = (employeeInfo, operation, imageFile, callback) => {
+export const uploadAvatarAction = (employeeInfo, operation, imageFile, preImage, callback) => {
   let data = new FormData();
   data.append('file', imageFile);
   data.append('name', 'image');
   return (dispatch) => {
     dispatch(uploadAvatarRequest());
-    axios.post('http://localhost:4000/api/image/upload', data)
+    axios.post(`http://localhost:4000/api/image/upload?preImage=${preImage}`, data)
       .then(res => {
         console.log(res);
         if (res.data.code === 0) {

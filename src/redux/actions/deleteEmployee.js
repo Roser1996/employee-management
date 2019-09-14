@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { getEmployeeAction } from './getEmployees';
 
 const deleteEmployeeRequest = () => {
   return {
@@ -21,13 +20,13 @@ const deleteEmployeeFail = (err) => {
   }
 }
 
-export const deleteEmployeeAction = (_id) => {
+export const deleteEmployeeAction = (_id, callback) => {
   return (dispatch) => {
     dispatch(deleteEmployeeRequest());
     axios.delete(`http://localhost:4000/api/delete/?_id=${_id}`)
       .then(res => {
         dispatch(deleteEmployeeSuccess(res));
-        dispatch(getEmployeeAction(0));
+        callback();
       })
       .catch(err => {
         dispatch(deleteEmployeeFail(err));

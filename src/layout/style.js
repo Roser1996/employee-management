@@ -7,12 +7,12 @@ const style = {
     width: "15%",
   },
   button: {
-    marginLeft: "30%",
     color: "#fff",
     backgroundColor: "#2ed573",
     // lineHeight: "40px"
   },
   paper: {
+    width: '100%',
     overflowX: "auto",
   },
   tableHeader: {
@@ -51,6 +51,13 @@ const style = {
   errorMessage: {
     color: 'red',
     marginLeft: "50%",
+  },
+  avatar: {
+    
+  },
+  progressCircle: {
+    margin: "auto",
+    marginTop: '10%'
   }
 }
 
